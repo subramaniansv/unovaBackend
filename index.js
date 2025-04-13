@@ -5,14 +5,30 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const app = express();
+<<<<<<< HEAD
 const corsOptions = {
   origin: process.env.FRONTEND_URL || 'http://localhost:5173', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
+=======
+>>>>>>> 1785855 (trying to ressolve cors conflict)
 
 // Apply CORS middleware with the options
-app.use(cors(corsOptions));
+const allowedOrigins = ['http://localhost:5173', 'https://unova.vercel.app'];
+
+app.use(cors({
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like curl or Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    } else {
+      return callback(new Error('Not allowed by CORS'));
+    }
+  }
+}));
+
 app.use(bodyParser.json());
 
 // Email Transporter Setup
