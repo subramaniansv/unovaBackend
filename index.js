@@ -5,7 +5,14 @@ const nodemailer = require("nodemailer");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Your frontend URL (or environment variable)
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+
+// Apply CORS middleware with the options
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // Email Transporter Setup
