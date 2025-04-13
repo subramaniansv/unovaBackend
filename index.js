@@ -6,7 +6,7 @@ require("dotenv").config();
 
 const app = express();
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || 'http://localhost:3000', // Your frontend URL (or environment variable)
+  origin: process.env.FRONTEND_URL || 'http://localhost:5173', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
